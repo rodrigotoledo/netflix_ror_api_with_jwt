@@ -47,7 +47,6 @@ jobs:
       # Add or replace test runners here
       - name: Run tests
         run: |
-           bundle exec rake assets:precompile
            bundle exec rspec spec
 
   lint:
