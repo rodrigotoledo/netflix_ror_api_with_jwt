@@ -1,0 +1,10 @@
+require: rubocop-rails
+Metrics/BlockLength:
+  Max: 300
+  Enabled: false
+  Exclude:
+    - 'Rakefile'
+    - '**/*.rake'
+    - 'spec/**/*.rb'
+AllCops:
+  EnabledByDefault: true
