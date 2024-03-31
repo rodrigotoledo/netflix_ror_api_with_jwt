@@ -2,6 +2,7 @@
 
 module Api
   class SessionsController < ApplicationController
+    before_action :authenticate_user!, only: :destroy
     def create
       user = User.find_by(email: params[:email])
       if user&.authenticate(params[:password])
