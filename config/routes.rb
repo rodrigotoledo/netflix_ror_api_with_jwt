@@ -5,13 +5,14 @@ Rails.application.routes.draw do
   end
   mount Sidekiq::Web => '/sidekiq'
   namespace :api do
-    resource :sessions, only: %i[create destroy]
-    resource :registrations, only: [:create] do
+    post :sign_in, to: 'sessions#create', as: :sign_in
+    delete :sign_in, to: 'sessions#destroy', as: :sign_out
+    resources :registrations, only: [:create] do
       collection do
         patch :update_account
       end
     end
-    resource :movies, only: [:show] do
+    resources :movies, only: [:show] do
       collection do
         get 'release', to: 'movies#release'
         get 'top-rated', to: 'movies#top_rated'

@@ -23,10 +23,6 @@ Shoulda::Matchers.configure do |config|
 end
 
 module SessionHelpers
-  # def sign_in(user, password = PASSWORD_FOR_USER)
-  #   post api_sessions_path, params: { email: user.email, password: password }
-  # end
-
   def generate_jwt_token(user)
     payload = { user_id: user.id }
     token = encode_token(payload)

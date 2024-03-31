@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Api::RegistrationsController', type: :request do
+RSpec.describe Api::RegistrationsController, type: :request do
   describe 'POST #create' do
     let(:valid_params) do
       {
