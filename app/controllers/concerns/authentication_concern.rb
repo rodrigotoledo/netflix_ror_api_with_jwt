@@ -15,21 +15,19 @@ module AuthenticationConcern
     begin
       token = auth_header.split(' ').last
       JWT.decode(token, ENV.fetch('JWT_KEY'), true, algorithm: 'HS256')
-    # :nocov:
     rescue StandardError => e
       logger.info '==== error on decode_token'
       logger.info e.message
       logger.info '===='
       head :unauthorized
     end
-    # :nocov:
   end
 
   private
 
   # use with before_action to authorize access
   def authenticate_user!
-    head :forbidden unless user_sign_in?
+    head :unauthorized unless user_sign_in?
   end
 
   def current_user
@@ -40,14 +38,12 @@ module AuthenticationConcern
       user_id = decoded_token_info.first['user_id']
       user = User.find_by(id: user_id)
       Current.user ||= user
-    # :nocov:
     rescue StandardError => e
       logger.info '==== error on current_user'
       logger.info e.message
       logger.info '===='
       nil
     end
-    # :nocov:
   end
 
   def user_sign_in?

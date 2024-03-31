@@ -23,17 +23,24 @@ Shoulda::Matchers.configure do |config|
 end
 
 module SessionHelpers
-  def sign_in_with(user, password = PASSWORD_FOR_USER)
-    post signin_path, params: { email: user.email, password: password }
+  # def sign_in(user, password = PASSWORD_FOR_USER)
+  #   post api_sessions_path, params: { email: user.email, password: password }
+  # end
+
+  def generate_jwt_token(user)
+    payload = { user_id: user.id }
+    token = encode_token(payload)
+    { 'Authorization': "Bearer #{token}" }
   end
 
-  def sign_in_api_with(user, password = PASSWORD_FOR_USER)
-    post api_signin_path, params: { email: user.email, password: password }
-    JSON.parse(response.body)
+  def generate_invalid_jwt_token
+    payload = { user_id: 'fake' }
+    token = encode_token(payload)
+    { 'Authorization': "Bearer #{token}" }
   end
 
-  def logout
-    delete logout_path
+  def encode_token(payload)
+    JWT.encode(payload, ENV.fetch('JWT_KEY'))
   end
 end
 
