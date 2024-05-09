@@ -16,12 +16,12 @@ Follow these steps to set up and run the project:
 ### Clone this repository
 
    ```bash
-   git clone https://github.com/rodrigotoledo/vue_rails_backend
+   git clone https://github.com/rodrigotoledo/netflix_ror_api_with_jwt
   ```
 ### Navigate to the project directory and install the dependencies
 
   ```bash
-  cd vue_rails_backend
+  cd netflix_ror_api_with_jwt
   bundle install
   rails db:create db:migrate db:seed
   ```
